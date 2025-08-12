@@ -74,7 +74,7 @@
               exit 1
             fi
 
-            echo "Ingestion job completed successfully."
+            echo "Ingestion job complete successfully."
 
         - name: Start and Wait for Glue Job tf_transformation_glue_job
           run: |
