@@ -1,109 +1,106 @@
-# POLYSCAN – Election Contributions Analytics
-💡 Turning U.S. political donation data into insights, trends, and transparency.
+# 📊 POLISCAN – Election Contributions Analytics  
+💡 *Turning U.S. political donation data into insights, trends, and transparency.*
 
-##📌 Overview
-Ever wondered who’s funding U.S. elections?
-POLYSCAN is an end-to-end big data analytics platform that processes the publicly available OpenFEC datasets to uncover trends, anomalies, and donor behavior in political contributions.
+---
 
-Using a scalable AWS-based data pipeline and interactive dashboards, the system enables:
+## 📌 Overview 
 
-🗳 Political analysts to study campaign finance trends
+Poliscan is an end-to-end big data analytics platform that leverages the publicly available OpenFEC (Federal Election Commission) datasets to uncover insights from U.S. political donation patterns. Built using a scalable AWS-based data pipeline architecture, the system enables political analysts, regulatory agencies, journalists, and the public to monitor political financing activities and detect anomalies with ease.
 
-🕵️ Regulators & journalists to detect suspicious donations
+Our platform supports transparent, data-driven decisions in the electoral landscape by visualizing financial trends, flagging suspicious activities, and simplifying access to campaign finance data.
 
-📊 The public to explore donation patterns easily
+## 🗂 Datasets Used  
 
-## 🗂 Datasets Used
-📂 Primary Sources:
+📂 **Primary Sources:**  
+- 🗃️ [Individual Contributions Dataset](https://www.fec.gov/campaign-finance-data/contributions-individuals-file-description/) — All donations made by individuals  
+- 🗃️ [Committee Master](https://www.fec.gov/campaign-finance-data/committee-master-file-description/) — Committees receiving contributions  
+- 🗃️ [Candidate Master](https://www.fec.gov/campaign-finance-data/candidate-master-file-description/) — Candidate details, elections, and party affiliation  
 
-🗃️ Individual Contributions Dataset — All donations made by individuals.
+---
 
-🗃️ Committee Master — Committees receiving contributions.
-
-🗃️ Candidate Master — Candidate details, elections, and party affiliation.
-
-##📌 Data Relationship:
-
-nginx
-Copy
-Edit
-Individuals → Committees → Candidates → Elections
-🎯 Project Objectives
- Clean & structure raw OpenFEC datasets (~40 GB) for analysis.
-
- Identify key features — donation amounts, donor demographics, transaction types.
-
- Detect unusual or suspicious donations using rule-based validation checks.
-
- Create interactive dashboards to visualize donation patterns and anomalies.
-
-## 🏛 Architecture
+## 🎯 Project Objectives
+- [x] **Clean & structure** raw OpenFEC datasets (~40 GB) for analysis  
+- [x] Identify **key features** — donation amounts, donor demographics, transaction types  
+- [x] Detect **unusual or suspicious donations** using rule-based validation checks  
+- [x] Create **interactive dashboards** to visualize donation patterns and anomalies  
 
 
-Our system follows a Medallion Architecture with Bronze, Silver, and Gold layers:
+## 🏛 Architecture  
+Our system follows a **Medallion Architecture** with **Bronze, Silver, and Gold layers**:
 
-Bronze Layer – Stores raw OpenFEC data for reference.
+1. **Bronze Layer** – Stores raw OpenFEC data for reference  
+2. **Silver Layer** – Data cleaning, standardization, and enrichment (AWS Glue + Amazon EMR)  
+3. **Gold Layer** – Optimized, query-ready data for analytics (Amazon Athena + Power BI)  
 
-Silver Layer – Data cleaning, standardization, and enrichment (AWS Glue + Amazon EMR).
 
-Gold Layer – Optimized, query-ready data for analytics (Amazon Athena + Power BI).
 
-## Services Used:
+🧾 Dataset Description
+Primary Source: OpenFEC Individual Contributions Dataset
 
-AWS Glue – ETL & schema discovery
+### 📄 Dataset Schema Overview
 
-AWS Glue Crawler – Automated schema inference
+| Column Name                 |   Description                                               |
+|-----------------------------|-------------------------------------------------------------|
+| `CMTE_ID`                   | Committee receiving the contribution                        |
+| `NAME`                      | Contributor's full name                                     |
+| `CITY`, `STATE`, `ZIP_CODE` | Geographic location of the donor                            |
+| `EMPLOYER`, `OCCUPATION`    | Donor's employment details                                  |
+| `TRANSACTION_DT`            | Date of donation                                            |
+| `TRANSACTION_AMT`           | Amount donated                                              |
+| `TRANSACTION_TP`            | Type of donation                                            |
+| `ENTITY_TP`                 | Entity type (e.g., `IND` = Individual)                      |
+| `OTHER_ID`                  | FEC ID of contributor if not an individual                  |
+| `SUB_ID`                    | Unique transaction identifier                               |
 
-Amazon EMR (Spark) – Large-scale distributed data processing
 
-Amazon Athena – Serverless SQL querying on S3
 
-Power BI – Interactive dashboard & visualization
 
-(Insert your architecture diagram image here)
+📈 Key KPIs & Metrics
 
-## 🔍 Key Transformations
-Split transaction_amt into:
+| KPI                               |   Description                                                    |
+|-----------------------------------|-------------------------------------------------------------------|
+| Total Contributions               | Sum of all donations over a specific period.                      |
+| Average Donation Size             | Mean contribution amount.                                         |
+| Donor Retention Rate              | Percentage of repeat donors.                                      |
+| Contribution Frequency            | Average number of donations per donor.                            |
+| Refund Rate                       | Percentage of donations refunded.                                 |
+| Earmarked Contribution Ratio      | Proportion of donations earmarked for specific purposes.          |
+| Regional Contribution Distribution| Analysis of donations by geographic location.                     |
+| Donor Demographics                | Breakdown of donors by occupation, employer, and gender.          |
 
-CONTRIBUTION_AMT (positive donations)
 
-REFUND_AMT (negative refunds)
+**Services Used:**  
+- ☁️ **AWS Glue** – ETL & schema discovery  
+- 📜 **AWS Glue Crawler** – Automated schema inference  
+- ⚡ **Amazon EMR (Spark)** – Large-scale distributed data processing  
+- 🗄 **Amazon Athena** – Serverless SQL querying on S3  
+- 📊 **Power BI** – Interactive dashboard & visualization
 
-Standardized party affiliation values (replaced (I) or . with "UNDEFINED")
+  
 
-Cleaned missing values & removed duplicates
 
-Standardized date formats & donor details
 
-Filtered relevant election years (2013–2025)
+Use Cases:
 
-## 📊 KPIs & Metrics
-KPI	Description
-💵 Total Contributions	Sum of all donations
-📈 Average Donation Size	Mean contribution amount
-🔄 Donor Retention Rate	% of repeat donors
-🗺 Regional Contribution	Donations by state/city
-📌 Refund Rate	% of donations refunded
-🎯 Earmarked Contribution Ratio	Share of donations for specific purposes
+•	Political Analysts & Researchers: Understand electoral dynamics, identify campaign finance trends, and support academic studies. 
 
-## 📌 Expected Outcomes
-📂 Clean, structured dataset ready for analysis
+•	Campaign Managers & Fundraisers: Optimize fundraising, allocate resources effectively, and analyze competitor strategies. 
 
-🖥 Interactive dashboard for public or organizational use
+•	Regulatory Bodies (e.g., FEC): Enhance compliance monitoring, fraud detection, and inform policy formulation. 
 
-📊 Trends & patterns in political donations
+•	Investigative Journalists: Uncover influence and expose financial irregularities. 
 
-🚨 Detection of suspicious contributions
+•	Public & Advocacy Groups: Promote transparency and advocate for campaign finance reform.
 
-🌍 Insights into who is donating — location, occupation, demographics
 
-## 💡 Use Cases
-👨‍💼 Campaign Managers – Optimize fundraising & track competition
-🏛 Regulatory Bodies (FEC) – Enhance compliance & fraud detection
-🕵️ Investigative Journalists – Uncover influence networks
-📢 Public & Advocacy Groups – Promote transparency & reform
+---
 
 ## ✨ Impact
-POLYSCAN transforms complex, large-scale political donation data into clear, actionable insights.
-It empowers citizens, analysts, and regulators to track money in politics, ensuring fairness, transparency, and trust in the electoral process.
+> POLISCAN transforms complex, large-scale political donation data into **clear, actionable insights**.  
+> It empowers citizens, analysts, and regulators to **track money in politics**, ensuring **fairness, transparency, and trust** in the electoral process.
+
+## Dashboard
+
+
+
 
