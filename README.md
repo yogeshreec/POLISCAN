@@ -1,7 +1,7 @@
-POLYSCAN – Election Contributions Analytics
+# POLYSCAN – Election Contributions Analytics
 💡 Turning U.S. political donation data into insights, trends, and transparency.
 
-📌 Overview
+##📌 Overview
 Ever wondered who’s funding U.S. elections?
 POLYSCAN is an end-to-end big data analytics platform that processes the publicly available OpenFEC datasets to uncover trends, anomalies, and donor behavior in political contributions.
 
@@ -13,7 +13,7 @@ Using a scalable AWS-based data pipeline and interactive dashboards, the system 
 
 📊 The public to explore donation patterns easily
 
-🗂 Datasets Used
+## 🗂 Datasets Used
 📂 Primary Sources:
 
 🗃️ Individual Contributions Dataset — All donations made by individuals.
@@ -22,7 +22,7 @@ Using a scalable AWS-based data pipeline and interactive dashboards, the system 
 
 🗃️ Candidate Master — Candidate details, elections, and party affiliation.
 
-📌 Data Relationship:
+##📌 Data Relationship:
 
 nginx
 Copy
@@ -37,7 +37,7 @@ Individuals → Committees → Candidates → Elections
 
  Create interactive dashboards to visualize donation patterns and anomalies.
 
-🏛 Architecture
+## 🏛 Architecture
 
 
 Our system follows a Medallion Architecture with Bronze, Silver, and Gold layers:
@@ -48,7 +48,7 @@ Silver Layer – Data cleaning, standardization, and enrichment (AWS Glue + Amaz
 
 Gold Layer – Optimized, query-ready data for analytics (Amazon Athena + Power BI).
 
-Services Used:
+## Services Used:
 
 AWS Glue – ETL & schema discovery
 
@@ -62,7 +62,7 @@ Power BI – Interactive dashboard & visualization
 
 (Insert your architecture diagram image here)
 
-🔍 Key Transformations
+## 🔍 Key Transformations
 Split transaction_amt into:
 
 CONTRIBUTION_AMT (positive donations)
@@ -77,7 +77,7 @@ Standardized date formats & donor details
 
 Filtered relevant election years (2013–2025)
 
-📊 KPIs & Metrics
+## 📊 KPIs & Metrics
 KPI	Description
 💵 Total Contributions	Sum of all donations
 📈 Average Donation Size	Mean contribution amount
@@ -86,7 +86,7 @@ KPI	Description
 📌 Refund Rate	% of donations refunded
 🎯 Earmarked Contribution Ratio	Share of donations for specific purposes
 
-📌 Expected Outcomes
+## 📌 Expected Outcomes
 📂 Clean, structured dataset ready for analysis
 
 🖥 Interactive dashboard for public or organizational use
@@ -97,13 +97,13 @@ KPI	Description
 
 🌍 Insights into who is donating — location, occupation, demographics
 
-💡 Use Cases
+## 💡 Use Cases
 👨‍💼 Campaign Managers – Optimize fundraising & track competition
 🏛 Regulatory Bodies (FEC) – Enhance compliance & fraud detection
 🕵️ Investigative Journalists – Uncover influence networks
 📢 Public & Advocacy Groups – Promote transparency & reform
 
-✨ Impact
+## ✨ Impact
 POLYSCAN transforms complex, large-scale political donation data into clear, actionable insights.
 It empowers citizens, analysts, and regulators to track money in politics, ensuring fairness, transparency, and trust in the electoral process.
 
